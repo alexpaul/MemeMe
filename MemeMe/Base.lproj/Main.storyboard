@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,8 +16,72 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pfK-Hd-4sj">
+                                <rect key="frame" x="137" y="105" width="327" height="347"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="327" id="IzV-VN-mXs"/>
+                                    <constraint firstAttribute="height" constant="347" id="P3X-DT-8ck"/>
+                                </constraints>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vg-I1-gWj">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="xXt-HC-VFC"/>
+                                    <barButtonItem systemItem="camera" id="I8Z-qO-kMX">
+                                        <connections>
+                                            <action selector="pickBarButtonItemPressed:" destination="vXZ-lx-hvc" id="h6m-hO-5Om"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="rB7-fd-q9e"/>
+                                </items>
+                            </toolbar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cCM-1y-VbM">
+                                <rect key="frame" x="16" y="28" width="568" height="30"/>
+                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="akH-tv-hya">
+                                <rect key="frame" x="16" y="493" width="568" height="30"/>
+                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="akH-tv-hya" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="6yU-u6-Aaq"/>
+                            <constraint firstItem="cCM-1y-VbM" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="Gwf-3a-q53"/>
+                            <constraint firstItem="cCM-1y-VbM" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="LVa-Qe-eTD"/>
+                            <constraint firstItem="2vg-I1-gWj" firstAttribute="top" secondItem="pfK-Hd-4sj" secondAttribute="bottom" constant="104" id="MW4-bP-Ni1"/>
+                            <constraint firstItem="pfK-Hd-4sj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="121" id="NJF-ek-Ghd"/>
+                            <constraint firstItem="pfK-Hd-4sj" firstAttribute="top" secondItem="cCM-1y-VbM" secondAttribute="bottom" constant="47" id="WCi-bg-m25"/>
+                            <constraint firstItem="pfK-Hd-4sj" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="85" id="YNI-GA-4sD"/>
+                            <constraint firstAttribute="centerX" secondItem="pfK-Hd-4sj" secondAttribute="centerX" constant="-0.5" id="Zj9-BK-4Aq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pfK-Hd-4sj" secondAttribute="trailing" constant="120" id="bbg-SD-kAp"/>
+                            <constraint firstItem="cCM-1y-VbM" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="cxE-J3-L7d"/>
+                            <constraint firstItem="akH-tv-hya" firstAttribute="top" secondItem="pfK-Hd-4sj" secondAttribute="bottom" constant="41" id="eNn-EO-iPz"/>
+                            <constraint firstItem="2vg-I1-gWj" firstAttribute="top" secondItem="pfK-Hd-4sj" secondAttribute="bottom" constant="104" id="er4-rA-J5Y"/>
+                            <constraint firstItem="2vg-I1-gWj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="gko-St-zdn"/>
+                            <constraint firstAttribute="centerY" secondItem="pfK-Hd-4sj" secondAttribute="centerY" constant="21.5" id="lzK-fZ-X0H"/>
+                            <constraint firstItem="akH-tv-hya" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="mRD-55-6Zp"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="2vg-I1-gWj" secondAttribute="bottom" id="rq5-qQ-PXw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2vg-I1-gWj" secondAttribute="trailing" constant="-16" id="s8I-Ke-k2p"/>
+                            <constraint firstItem="2vg-I1-gWj" firstAttribute="top" secondItem="akH-tv-hya" secondAttribute="bottom" constant="33" id="wty-DB-Tu7"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="NJF-ek-Ghd"/>
+                                <exclude reference="bbg-SD-kAp"/>
+                                <exclude reference="MW4-bP-Ni1"/>
+                                <exclude reference="er4-rA-J5Y"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="bottomTextField" destination="akH-tv-hya" id="v5O-gt-q29"/>
+                        <outlet property="imageView" destination="pfK-Hd-4sj" id="aNh-53-cl9"/>
+                        <outlet property="topTextField" destination="cCM-1y-VbM" id="Rag-Bs-lhm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

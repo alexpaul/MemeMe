@@ -14,6 +14,7 @@
 		570153161B3C0EFB0059DF2D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 570153151B3C0EFB0059DF2D /* Images.xcassets */; };
 		570153191B3C0EFB0059DF2D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 570153171B3C0EFB0059DF2D /* LaunchScreen.xib */; };
 		570153251B3C0EFB0059DF2D /* MemeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570153241B3C0EFB0059DF2D /* MemeMeTests.swift */; };
+		5701532F1B3CE4770059DF2D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5701532E1B3CE4770059DF2D /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		5701531E1B3C0EFB0059DF2D /* MemeMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		570153231B3C0EFB0059DF2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		570153241B3C0EFB0059DF2D /* MemeMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeTests.swift; sourceTree = "<group>"; };
+		5701532E1B3CE4770059DF2D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5701532F1B3CE4770059DF2D /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,12 +82,8 @@
 		570153081B3C0EFB0059DF2D /* MemeMe */ = {
 			isa = PBXGroup;
 			children = (
-				5701530B1B3C0EFB0059DF2D /* AppDelegate.swift */,
 				570153101B3C0EFB0059DF2D /* ViewController.swift */,
 				570153121B3C0EFB0059DF2D /* Main.storyboard */,
-				570153151B3C0EFB0059DF2D /* Images.xcassets */,
-				570153171B3C0EFB0059DF2D /* LaunchScreen.xib */,
-				5701530D1B3C0EFB0059DF2D /* MemeMe.xcdatamodeld */,
 				570153091B3C0EFB0059DF2D /* Supporting Files */,
 			);
 			path = MemeMe;
@@ -93,6 +92,11 @@
 		570153091B3C0EFB0059DF2D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5701532E1B3CE4770059DF2D /* MobileCoreServices.framework */,
+				570153151B3C0EFB0059DF2D /* Images.xcassets */,
+				570153171B3C0EFB0059DF2D /* LaunchScreen.xib */,
+				5701530D1B3C0EFB0059DF2D /* MemeMe.xcdatamodeld */,
+				5701530B1B3C0EFB0059DF2D /* AppDelegate.swift */,
 				5701530A1B3C0EFB0059DF2D /* Info.plist */,
 			);
 			name = "Supporting Files";
