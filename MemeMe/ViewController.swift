@@ -109,10 +109,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // MARK: UITextFieldDelegate Methods
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        if self.topTextField.text == "TOP"{
+        if textField == self.topTextField && self.topTextField.text == "TOP"{
             self.topTextField.text = ""
         }
-        if self.bottomTextField.text == "BOTTOM"{
+        if textField == self.bottomTextField && self.bottomTextField.text == "BOTTOM"{
             self.bottomTextField.text = ""
         }
         
