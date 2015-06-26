@@ -12,12 +12,15 @@ import MobileCoreServices
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
                         UITextFieldDelegate
 {
+    // IBOutlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
-    
-    
+
     var imagePickerController: UIImagePickerController!
+    
+    let memeTextAttributes = [NSStrokeColorAttributeName: UIColor.blackColor(), NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        NSStrokeWidthAttributeName: 3.0]
     
     // MARK: View Life Cycle
     override func viewDidLoad() {
@@ -25,6 +28,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         self.topTextField.delegate = self
         self.bottomTextField.delegate = self
+        
+        self.topTextField.defaultTextAttributes = memeTextAttributes
+        self.bottomTextField.defaultTextAttributes = memeTextAttributes
+        
+        self.topTextField.textAlignment = NSTextAlignment.Center
+        self.bottomTextField.textAlignment = NSTextAlignment.Center
         
         self.topTextField.text = "TOP"
         self.bottomTextField.text = "BOTTOM"
@@ -46,6 +55,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 UIAlertAction in
                 self.cameraActionHandler()
             }
+            
             var actionCameraRoll = UIAlertAction(title: "Camera Roll", style: UIAlertActionStyle.Default) {
                 UIAlertAction in
                 self.cameraRollActionHandler()
