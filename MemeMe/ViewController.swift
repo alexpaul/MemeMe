@@ -23,6 +23,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSStrokeWidthAttributeName: 3.0]
     
     // MARK: View Life Cycle
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.subscribeToKeyboardNotifications()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +43,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         self.topTextField.text = "TOP"
         self.bottomTextField.text = "BOTTOM"
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.unsubscribeFromKeyboardNotifications()
     }
     
     // MARK: IBActions
@@ -115,12 +126,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if textField == self.bottomTextField && self.bottomTextField.text == "BOTTOM"{
             self.bottomTextField.text = ""
         }
-        
-        // TODO: Fix keyboard hiding bottom text field
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        // Return the view to it's initial state
+        self.view.frame.origin.y = 0
+        
         textField.resignFirstResponder()
+
         return true
     }
     
@@ -137,6 +150,29 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         self.imagePickerController.allowsEditing = false
         self.presentViewController(self.imagePickerController, animated: true, completion: nil)
+    }
+    
+    // MARK: Keyboard Adjustment
+    
+    func subscribeToKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+    }
+    
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat{
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameBeginUserInfoKey] as! NSValue
+        return keyboardSize.CGRectValue().height
+    }
+    
+    func keyboardWillShow(notification: NSNotification){
+        // Only adjust view when bottom text field is being edited
+        if self.bottomTextField.isFirstResponder(){
+            self.view.frame.origin.y -= getKeyboardHeight(notification)
+        }
     }
 
 
