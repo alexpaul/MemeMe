@@ -26,7 +26,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.subscribeToKeyboardNotifications()
+        self.subscribeToKeyboardWillShowNotification()
+        self.subscribeToKeyboardWillHideNotification()
     }
     
     override func viewDidLoad() {
@@ -47,7 +48,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.unsubscribeFromKeyboardNotifications()
+        self.unsubscribeFromKeyboardWillShowNotification()
     }
     
     // MARK: IBActions
@@ -112,9 +113,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{ // safe unwrapping of the info[key] object
             self.imageView.image = image
         }
-        
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     // MARK: UITextFieldDelegate Methods
@@ -129,11 +128,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        // Return the view to it's initial state
-        self.view.frame.origin.y = 0
-        
         textField.resignFirstResponder()
-
         return true
     }
     
@@ -154,12 +149,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // MARK: Keyboard Adjustment
     
-    func subscribeToKeyboardNotifications() {
+    func subscribeToKeyboardWillShowNotification() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
     }
     
-    func unsubscribeFromKeyboardNotifications() {
+    func unsubscribeFromKeyboardWillShowNotification() {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+    }
+    
+    func subscribeToKeyboardWillHideNotification(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func unsubsribeToKeyboardWillHideNotification(){
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat{
@@ -172,6 +175,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Only adjust view when bottom text field is being edited
         if self.bottomTextField.isFirstResponder(){
             self.view.frame.origin.y -= getKeyboardHeight(notification)
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification){
+        if self.bottomTextField.isFirstResponder(){
+            self.view.frame.origin.y += getKeyboardHeight(notification)
         }
     }
 
