@@ -21,7 +21,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
 
     var imagePickerController: UIImagePickerController!
-    var meme: Meme!
     
     let memeTextAttributes = [
         NSStrokeColorAttributeName: UIColor.blackColor(),
@@ -123,11 +122,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func actionBarButtonItemPressed(sender: UIBarButtonItem) {
-        // Setup the Meme Object 
-        saveMeme()
+        // Create a Meme Object
+        var meme = createMeme()
+        
+        // Save the Meme object to the Meme Array in the Meme Shared Model Singleton Instance 
+        let sharedModel = MemeSharedModel.sharedInstance
+        sharedModel.addMemes(meme)
+        println("There are \(sharedModel.memesCount()) memes")
         
         // Share Meme
-        var activityController = UIActivityViewController(activityItems: [self.meme.memeImage!], applicationActivities: nil)
+        var activityController = UIActivityViewController(activityItems: [meme.memeImage!], applicationActivities: nil)
         self.navigationController?.presentViewController(activityController, animated: true, completion: nil)
     }
     
@@ -178,27 +182,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.presentViewController(self.imagePickerController, animated: true, completion: nil)
     }
     
-    func saveMeme(){
-        self.meme = Meme(topMeme: self.topTextField.text, bottomMeme: bottomTextField.text,
+    func createMeme() -> Meme{
+        var meme = Meme(topMeme: self.topTextField.text, bottomMeme: bottomTextField.text,
             originalImage: self.imageView.image!, memeImage: generateMemeImage())
+        return meme
     }
     
     func generateMemeImage() -> UIImage{
-        // TODO: hide the navbar, toolbar and status bar
+        // Hide the navbar and toolbar
         self.navigationController?.navigationBarHidden = true
         self.navigationController?.toolbarHidden = true
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.None)
         
         // Render the View as an Image
         UIGraphicsBeginImageContext(self.view.frame.size) // view controller's view
-        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        let renderFrameSize: CGRect = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y - 20, width: self.view.frame.width, height: self.view.frame.height + 20)
+        self.view.drawViewHierarchyInRect(renderFrameSize, afterScreenUpdates: true) //self.view.frame
         let memeImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        // TODO: show the navbar, toolbar and status bar
+        // Show the navbar and toolbar
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.toolbarHidden = false
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
         
         return memeImage
     }
