@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MemeEditorViewController.swift
 //  MemeMe
 //
 //  Created by Alex Paul on 6/25/15.
@@ -10,7 +10,7 @@ import UIKit
 import MobileCoreServices
 import CoreText
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
                         UITextFieldDelegate
 {
     // IBOutlets
@@ -19,6 +19,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var actionBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var cameraBarButtonItem: UIBarButtonItem!
+    
     
 
     var imagePickerController: UIImagePickerController!
@@ -93,6 +94,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    @IBAction func cancelBarButtonItemPressed(sender: UIBarButtonItem) {
+        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     @IBAction func actionBarButtonItemPressed(sender: UIBarButtonItem) {
         // Create a Meme Object
@@ -101,6 +105,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Save the Meme object to the Meme Array in the Meme Shared Model Singleton Instance 
         let sharedModel = MemeSharedModel.sharedInstance
         sharedModel.addMemes(meme)
+        
+        println("There are \(sharedModel.memesArray().count) memes in the MemeEditor")
         
         // Share Meme
         var activityController = UIActivityViewController(activityItems: [meme.memeImage!], applicationActivities: nil)

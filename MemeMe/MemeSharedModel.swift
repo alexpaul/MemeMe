@@ -26,6 +26,10 @@ class MemeSharedModel: NSObject {
     func memesCount() -> Int {
         return memes.count
     }
+    
+    func memesArray() -> [Meme]{
+        return memes
+    }
    
 }
     
