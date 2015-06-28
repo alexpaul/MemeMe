@@ -18,6 +18,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var actionBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var cameraBarButtonItem: UIBarButtonItem!
     
 
     var imagePickerController: UIImagePickerController!
@@ -55,6 +56,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         self.topTextField.text = "TOP"
         self.bottomTextField.text = "BOTTOM"
+        
+        // If Camera isn't present disable Camera Button 
+        if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
+            self.cameraBarButtonItem.enabled = false
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -73,53 +79,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
             && UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
         {
-            var alert = UIAlertController(title: "MemeMe Photo", message: "Take Photo or Choose from Camera Roll",
-                preferredStyle: UIAlertControllerStyle.ActionSheet)
-            
-            var actionTakePhoto = UIAlertAction(title: "Take Photo", style: UIAlertActionStyle.Default){
-                UIAlertAction in
-                self.cameraActionHandler()
-            }
-            
-            var actionCameraRoll = UIAlertAction(title: "Camera Roll", style: UIAlertActionStyle.Default) {
-                UIAlertAction in
-                self.cameraRollActionHandler()
-            }
-            
-            var actionCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel){
-                UIAlertAction in
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-            
-            alert.addAction(actionCameraRoll)
-            alert.addAction(actionTakePhoto)
-            alert.addAction(actionCancel)
-            
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-        
-        else if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
-            
-            var alert = UIAlertController(title: "MemeMe Photo", message: "Choose From Camera Roll",
-                preferredStyle: UIAlertControllerStyle.ActionSheet)
-            
-            var actionCameraRoll = UIAlertAction(title: "Camera Roll", style: UIAlertActionStyle.Default){
-                UIAlertAction in
-                self.cameraRollActionHandler()
-            }
-            
-            var actionCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel){
-                UIAlertAction in
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-            
-            alert.addAction(actionCameraRoll)
-            alert.addAction(actionCancel)
-            
-            self.presentViewController(alert, animated: true, completion: nil)
-            
+            setupCamera()
         }
     }
+    
+    @IBAction func photosAlbumBarButtonItemPressed(sender: UIBarButtonItem) {
+        self.imagePickerController = UIImagePickerController()
+        self.imagePickerController.delegate = self
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary){
+            
+            setupPhotosAlbum()
+        }
+    }
+    
     
     @IBAction func actionBarButtonItemPressed(sender: UIBarButtonItem) {
         // Create a Meme Object
@@ -128,7 +101,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Save the Meme object to the Meme Array in the Meme Shared Model Singleton Instance 
         let sharedModel = MemeSharedModel.sharedInstance
         sharedModel.addMemes(meme)
-        println("There are \(sharedModel.memesCount()) memes")
         
         // Share Meme
         var activityController = UIActivityViewController(activityItems: [meme.memeImage!], applicationActivities: nil)
@@ -169,14 +141,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // MARK: Helper Methods
     
-    func cameraActionHandler(){
+    func setupCamera(){
         self.imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
         self.imagePickerController.allowsEditing = false
         self.imagePickerController.mediaTypes = [kUTTypeImage] // capture still images ONLY
         self.presentViewController(self.imagePickerController, animated: true, completion: nil)
     }
     
-    func cameraRollActionHandler(){
+    func setupPhotosAlbum(){
         self.imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         self.imagePickerController.allowsEditing = false
         self.presentViewController(self.imagePickerController, animated: true, completion: nil)
