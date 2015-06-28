@@ -15,6 +15,7 @@
 		570153191B3C0EFB0059DF2D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 570153171B3C0EFB0059DF2D /* LaunchScreen.xib */; };
 		570153251B3C0EFB0059DF2D /* MemeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570153241B3C0EFB0059DF2D /* MemeMeTests.swift */; };
 		5701532F1B3CE4770059DF2D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5701532E1B3CE4770059DF2D /* MobileCoreServices.framework */; };
+		570153311B3EC3690059DF2D /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570153301B3EC3690059DF2D /* Meme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		570153231B3C0EFB0059DF2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		570153241B3C0EFB0059DF2D /* MemeMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeTests.swift; sourceTree = "<group>"; };
 		5701532E1B3CE4770059DF2D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		570153301B3EC3690059DF2D /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 		570153081B3C0EFB0059DF2D /* MemeMe */ = {
 			isa = PBXGroup;
 			children = (
+				570153301B3EC3690059DF2D /* Meme.swift */,
 				570153101B3C0EFB0059DF2D /* ViewController.swift */,
 				570153121B3C0EFB0059DF2D /* Main.storyboard */,
 				570153091B3C0EFB0059DF2D /* Supporting Files */,
@@ -220,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				570153111B3C0EFB0059DF2D /* ViewController.swift in Sources */,
+				570153311B3EC3690059DF2D /* Meme.swift in Sources */,
 				5701530C1B3C0EFB0059DF2D /* AppDelegate.swift in Sources */,
 				5701530F1B3C0EFB0059DF2D /* MemeMe.xcdatamodeld in Sources */,
 			);
