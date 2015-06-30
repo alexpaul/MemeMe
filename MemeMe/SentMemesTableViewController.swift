@@ -13,6 +13,7 @@ class SentMemesTableViewController: UIViewController, UITableViewDelegate, UITab
     // MARK: IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var addBarButtonItem: UIBarButtonItem!
     
     // Instance Variables
     
@@ -29,6 +30,14 @@ class SentMemesTableViewController: UIViewController, UITableViewDelegate, UITab
         super.viewWillAppear(animated)
         self.sharedModel = MemeSharedModel.sharedInstance
         self.tableView.reloadData()
+        
+        println("there are \(self.sharedModel.memesCount()) meemes")
+        
+        if self.sharedModel.memesCount() > 0 {
+            self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        }else{
+            self.navigationItem.leftBarButtonItem = nil
+        }
     }
     
     // MARK: UITableViewDataSource Methods
@@ -47,6 +56,29 @@ class SentMemesTableViewController: UIViewController, UITableViewDelegate, UITab
         cell.bottomMemeLabel.text = meme.bottomMeme
         
         return cell
+    }
+    
+    // MARK: Delete
+    
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        self.tableView.setEditing(editing, animated: true)
+        if editing{
+            self.addBarButtonItem.enabled = false
+        }else{
+            self.addBarButtonItem.enabled = true
+        }
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            self.sharedModel.removeMemeAtIndex(indexPath.row) // Remove from Data Source
+            self.tableView.reloadData() // Update Table View
+        }
     }
     
     // MARK: UITableViewDelegate Methods

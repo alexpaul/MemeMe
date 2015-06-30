@@ -240,6 +240,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addBarButtonItem" destination="x34-DQ-pRP" id="pod-iX-G8Q"/>
                         <outlet property="tableView" destination="vDT-Ej-rTn" id="N3c-bb-ZCL"/>
                     </connections>
                 </viewController>

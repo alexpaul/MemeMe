@@ -27,8 +27,12 @@ class MemeSharedModel: NSObject {
         return memes.count
     }
     
-    func memesArray() -> [Meme]{
+    func memesArray() -> [Meme] {
         return memes
+    }
+    
+    func removeMemeAtIndex(index: Int) {
+        memes.removeAtIndex(index)
     }
    
 }
