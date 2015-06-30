@@ -17,7 +17,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
-    @IBOutlet weak var actionBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var shareBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var cameraBarButtonItem: UIBarButtonItem!
     
     
@@ -44,7 +44,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         super.viewDidLoad()
         
         // Disable Action Bar Button Item
-        self.actionBarButtonItem.enabled = false
+        self.shareBarButtonItem.enabled = false
         
         self.topTextField.delegate = self
         self.bottomTextField.delegate = self
@@ -98,18 +98,26 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func actionBarButtonItemPressed(sender: UIBarButtonItem) {
+    // Share Meme
+    @IBAction func shareBarButtonItemPressed(sender: UIBarButtonItem) {
         // Create a Meme Object
         var meme = createMeme()
         
-        // Save the Meme object to the Meme Array in the Meme Shared Model Singleton Instance 
-        let sharedModel = MemeSharedModel.sharedInstance
-        sharedModel.addMemes(meme)
-        
-        println("There are \(sharedModel.memesArray().count) memes in the MemeEditor")
-        
-        // Share Meme
         var activityController = UIActivityViewController(activityItems: [meme.memeImage!], applicationActivities: nil)
+        activityController.completionWithItemsHandler = {(activityType, completed: Bool, _, _) in
+            if completed {
+                // Save the Meme object to the Meme Array in the Meme Shared Model Singleton Instance
+                let sharedModel = MemeSharedModel.sharedInstance
+                sharedModel.addMemes(meme)
+                
+                // TODO: Change Cancel to Done to indicate Meme was shared and is Done being edited
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "done")
+                
+                println("Meme Shared. Save to Sent Memes Array.")
+            }else{
+                println("Meme was NOT Shared. Do NOT save to Sent Memes Array")
+            }
+        }
         self.navigationController?.presentViewController(activityController, animated: true, completion: nil)
     }
     
@@ -124,7 +132,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             self.imageView.image = image
             
             // Enable the Action Bar Button Item
-            self.actionBarButtonItem.enabled = true
+            self.shareBarButtonItem.enabled = true
         }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -183,6 +191,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.navigationController?.toolbarHidden = false
         
         return memeImage
+    }
+    
+    func done() {
+        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: Keyboard Adjustment

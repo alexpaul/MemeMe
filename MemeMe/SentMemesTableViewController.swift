@@ -11,9 +11,11 @@ import UIKit
 class SentMemesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: IBOutlets
+    
     @IBOutlet weak var tableView: UITableView!
     
     // Instance Variables
+    
     var sharedModel: MemeSharedModel!
     
     // MARK: View Life Cycle
@@ -32,26 +34,23 @@ class SentMemesTableViewController: UIViewController, UITableViewDelegate, UITab
     // MARK: UITableViewDataSource Methods
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.sharedModel.memesArray().count
+        return self.sharedModel.memesCount()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MemeCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("MemeCell") as! MemeTableViewCell
         
         let meme = self.sharedModel.memesArray()[indexPath.row]
         
-        var topLabel = cell.viewWithTag(2) as! UILabel
-        var bottomLabel = cell.viewWithTag(3) as! UILabel
-        var imageView = cell.viewWithTag(1) as! UIImageView
+        cell.memeImageView.image = meme.memeImage
+        cell.topMemeLabel.text = meme.topMeme
+        cell.bottomMemeLabel.text = meme.bottomMeme
         
-        topLabel.text = meme.topMeme
-        bottomLabel.text = meme.bottomMeme
-        imageView.image = meme.memeImage
-                
         return cell
     }
     
     // MARK: UITableViewDelegate Methods
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let meme = self.sharedModel.memesArray()[indexPath.row]
         
