@@ -46,17 +46,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Disable Action Bar Button Item
         self.shareBarButtonItem.enabled = false
         
-        self.topTextField.delegate = self
-        self.bottomTextField.delegate = self
-    
-        self.topTextField.defaultTextAttributes = memeTextAttributes
-        self.bottomTextField.defaultTextAttributes = memeTextAttributes
-        
-        self.topTextField.textAlignment = NSTextAlignment.Center
-        self.bottomTextField.textAlignment = NSTextAlignment.Center
-        
-        self.topTextField.text = "TOP"
-        self.bottomTextField.text = "BOTTOM"
+        setupTextFields()
         
         // If Camera isn't present disable Camera Button 
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
@@ -154,6 +144,20 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     // MARK: Helper Methods
+    
+    func setupTextFields() {
+        self.topTextField.delegate = self
+        self.bottomTextField.delegate = self
+        
+        self.topTextField.defaultTextAttributes = memeTextAttributes
+        self.bottomTextField.defaultTextAttributes = memeTextAttributes
+        
+        self.topTextField.textAlignment = NSTextAlignment.Center
+        self.bottomTextField.textAlignment = NSTextAlignment.Center
+        
+        self.topTextField.text = "TOP"
+        self.bottomTextField.text = "BOTTOM"
+    }
     
     func setupCamera(){
         self.imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
