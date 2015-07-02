@@ -56,11 +56,12 @@ class SentMemesCollectionViewController: UIViewController,
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let meme = self.sharedModel.memesArray()[indexPath.item]
         
-        let memeDetailVC = MemeDetailViewController()
-        memeDetailVC.meme = meme
+        let memeDetailViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         
-        memeDetailVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(memeDetailVC, animated: true)
+        memeDetailViewController.meme = meme
+        memeDetailViewController.hidesBottomBarWhenPushed = true
+        
+        self.navigationController?.pushViewController(memeDetailViewController, animated: true)
     }
     
     // MARK: Helper Methods

@@ -30,9 +30,7 @@ class SentMemesTableViewController: UIViewController, UITableViewDelegate, UITab
         super.viewWillAppear(animated)
         self.sharedModel = MemeSharedModel.sharedInstance
         self.tableView.reloadData()
-        
-        println("there are \(self.sharedModel.memesCount()) meemes")
-        
+                
         if self.sharedModel.memesCount() > 0 {
             self.navigationItem.leftBarButtonItem = self.editButtonItem()
         }else{
@@ -86,10 +84,12 @@ class SentMemesTableViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let meme = self.sharedModel.memesArray()[indexPath.row]
         
-        let memeDetailVC = MemeDetailViewController()
-        memeDetailVC.meme = meme
-        memeDetailVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(memeDetailVC, animated: true)
+        let memeDetailViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+        
+        memeDetailViewController.meme = meme
+        memeDetailViewController.hidesBottomBarWhenPushed = true
+        
+        self.navigationController?.pushViewController(memeDetailViewController, animated: true)
     }
     
     // MARK: IBActions

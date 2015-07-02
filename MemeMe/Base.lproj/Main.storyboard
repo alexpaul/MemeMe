@@ -159,7 +159,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YW2-7J-hpp" id="Rr4-yg-i2Y">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XiG-IU-btB">
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XiG-IU-btB">
                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="pSm-9Q-ZxN"/>
@@ -168,13 +168,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top Meme" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GNE-S7-2au">
                                                     <rect key="frame" x="88" y="8" width="504" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bottom Meme" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLc-3O-vK3">
                                                     <rect key="frame" x="88" y="42" width="504" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -251,7 +251,7 @@
         <!--Navigation Controller-->
         <scene sceneID="hgj-lw-xva">
             <objects>
-                <navigationController storyboardIdentifier="MemeEditorNavigationController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="G2o-vf-jxg" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MemeEditorNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" toolbarHidden="NO" id="G2o-vf-jxg" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ROR-lc-bWK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -269,11 +269,46 @@
             </objects>
             <point key="canvasLocation" x="1393" y="-482"/>
         </scene>
+        <!--Meme Detail View Controller-->
+        <scene sceneID="DFc-xR-Ekt">
+            <objects>
+                <viewController storyboardIdentifier="MemeDetailViewController" id="vHF-W5-Car" customClass="MemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5Kq-GM-rzP"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vwy-G9-f1T"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DDI-Jb-RCu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Ytz-72-oJK"/>
+                        <barButtonItem title="Delete Meme" id="kFm-ot-MTY">
+                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deleteMemeBarButtonItemPressed:" destination="vHF-W5-Car" id="yif-Cd-Aac"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="28K-IW-9Tz"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="uZP-4y-oeU">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="TdS-f2-0Jj">
+                            <connections>
+                                <action selector="editBarButtonItemPressed:" destination="vHF-W5-Car" id="P5l-lZ-BBX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m34-eU-CCY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2201" y="322"/>
+        </scene>
         <!--Table-->
         <scene sceneID="ZO8-Rp-2ec">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ldo-EX-jzS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Table" id="3Fh-jf-151"/>
+                    <tabBarItem key="tabBarItem" title="Table" image="table" id="3Fh-jf-151"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8ag-ja-Sed">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -316,7 +351,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8YM-Ux-9nT">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8YM-Ux-9nT">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 </imageView>
                                             </subviews>
@@ -382,7 +417,7 @@
         <scene sceneID="VeP-4x-FAy">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ll6-kN-UtC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Collection" id="FtW-ov-QEr"/>
+                    <tabBarItem key="tabBarItem" title="Collection" image="collection" id="FtW-ov-QEr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3yN-FY-yJV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -397,5 +432,30 @@
             </objects>
             <point key="canvasLocation" x="-178" y="322"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2jY-lk-h0o">
+            <objects>
+                <navigationController storyboardIdentifier="MemeDetailNavigationController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="oEu-yE-O4t" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SEV-JP-B4w">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="9V0-7E-xaw">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="vHF-W5-Car" kind="relationship" relationship="rootViewController" id="chV-L0-UcH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Pt-pg-6Y8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1393" y="322"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="collection" width="30" height="30"/>
+        <image name="table" width="30" height="30"/>
+    </resources>
 </document>

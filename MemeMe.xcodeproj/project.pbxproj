@@ -485,6 +485,7 @@
 				5701532A1B3C0EFB0059DF2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5701532B1B3C0EFB0059DF2D /* Build configuration list for PBXNativeTarget "MemeMeTests" */ = {
 			isa = XCConfigurationList;
@@ -493,6 +494,7 @@
 				5701532D1B3C0EFB0059DF2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

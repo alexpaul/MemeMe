@@ -102,10 +102,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 
                 // TODO: Change Cancel to Done to indicate Meme was shared and is Done being edited
                 self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "done")
-                
-                println("Meme Shared. Save to Sent Memes Array.")
-            }else{
-                println("Meme was NOT Shared. Do NOT save to Sent Memes Array")
             }
         }
         self.navigationController?.presentViewController(activityController, animated: true, completion: nil)
