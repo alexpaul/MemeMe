@@ -11,6 +11,7 @@ import UIKit
 class MemeSharedModel: NSObject {
     
     var memes = [Meme]() // Meme Array
+    var memeFont: String!
     
     class var sharedInstance: MemeSharedModel {
         struct Static {
@@ -33,6 +34,14 @@ class MemeSharedModel: NSObject {
     
     func removeMemeAtIndex(index: Int) {
         memes.removeAtIndex(index)
+    }
+    
+    func getMemeFont() -> String? {
+        return memeFont
+    }
+    
+    func createMemeFont(memeFont: String) {
+        self.memeFont = memeFont
     }
    
 }

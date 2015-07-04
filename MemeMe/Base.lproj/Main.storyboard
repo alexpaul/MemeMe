@@ -5,6 +5,51 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Settings-->
+        <scene sceneID="Lwh-yw-U5I">
+            <objects>
+                <tableViewController id="T7b-69-2nL" customClass="SettingsViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="vFH-gt-7O6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FontCell" textLabel="iGz-II-Yav" style="IBUITableViewCellStyleDefault" id="7DL-YL-cab">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7DL-YL-cab" id="RT7-yB-qEZ">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iGz-II-Yav">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="T7b-69-2nL" id="w2K-SM-r1e"/>
+                            <outlet property="delegate" destination="T7b-69-2nL" id="3wy-Ak-6R9"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="gPD-NF-nfq">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="ndd-v3-Yw8">
+                            <connections>
+                                <action selector="doneBarButtonItemPressed:" destination="T7b-69-2nL" id="ca5-tp-RZT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="staticTableView" destination="vFH-gt-7O6" id="CYX-eP-1Sx"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iz5-dV-khq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3823" y="-482"/>
+        </scene>
         <!--Meme Editor View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -93,6 +138,12 @@
                                 <action selector="cameraBarButtonItemPressed:" destination="vXZ-lx-hvc" id="L2D-5C-eO7"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="55s-Ka-C60"/>
+                        <barButtonItem title="Settings" id="u3o-iq-CMw">
+                            <connections>
+                                <segue destination="ka5-eU-pdr" kind="presentation" identifier="showSettings" id="xa2-pn-Uw1"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="0dW-pC-ohD"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="CQe-fu-a6z">
@@ -111,6 +162,7 @@
                         <outlet property="bottomTextField" destination="dPL-LY-3bO" id="Ica-gH-Gie"/>
                         <outlet property="cameraBarButtonItem" destination="0F2-cQ-qqV" id="vEN-PY-GUi"/>
                         <outlet property="imageView" destination="pfK-Hd-4sj" id="aNh-53-cl9"/>
+                        <outlet property="settingsBarButtonItem" destination="u3o-iq-CMw" id="h7Q-YR-jNS"/>
                         <outlet property="shareBarButtonItem" destination="dle-4F-8dL" id="SeW-rf-1EE"/>
                         <outlet property="topTextField" destination="3Zh-5R-x86" id="0eq-cb-E8T"/>
                     </connections>
@@ -452,6 +504,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Pt-pg-6Y8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1393" y="322"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TFN-b1-woc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ka5-eU-pdr" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ukk-80-kEl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="T7b-69-2nL" kind="relationship" relationship="rootViewController" id="EBy-To-vTx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vf8-6t-wbz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3011" y="-482"/>
         </scene>
     </scenes>
     <resources>

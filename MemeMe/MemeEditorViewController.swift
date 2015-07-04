@@ -13,31 +13,30 @@ import CoreText
 class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
                         UITextFieldDelegate
 {
-    // IBOutlets
+    // MARK: IBOutlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var cameraBarButtonItem: UIBarButtonItem!
-    
-    
+    @IBOutlet weak var settingsBarButtonItem: UIBarButtonItem!
 
-    var imagePickerController: UIImagePickerController!
+    // MARK: Instance Variables
     
-    let memeTextAttributes = [
-        NSStrokeColorAttributeName: UIColor.blackColor(),
-        NSForegroundColorAttributeName: UIColor.whiteColor(),
-        NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSStrokeWidthAttributeName: -4.0]
-        // NSStrokeWidthAttributeName needs to be a negative number
-        // http://stackoverflow.com/questions/30955277/nsforegroundcolorattributename-doesnt-work-in-swift
+    var defaultFont: String!
+    var imagePickerController: UIImagePickerController!
+    var memeTextAttributes = [String: NSObject]()
     
     // MARK: View Life Cycle
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         self.subscribeToKeyboardWillShowNotification()
         self.subscribeToKeyboardWillHideNotification()
+        
+        setupDefaultTextAttributes()
+        setupTextFields()
     }
     
     override func viewDidLoad() {
@@ -46,7 +45,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Disable Action Bar Button Item
         self.shareBarButtonItem.enabled = false
         
-        setupTextFields()
+        self.settingsBarButtonItem?.title = NSString(string: "\u{2699}") as? String
+        var dict = [NSFontAttributeName: UIFont(name: "Helvetica", size: 24.0)!]
+        self.settingsBarButtonItem.setTitleTextAttributes(dict, forState: UIControlState.Normal)
+        
+        //setupTextFields()
         
         // If Camera isn't present disable Camera Button 
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
@@ -100,7 +103,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 let sharedModel = MemeSharedModel.sharedInstance
                 sharedModel.addMemes(meme)
                 
-                // TODO: Change Cancel to Done to indicate Meme was shared and is Done being edited
+                // Change Cancel to Done to indicate Meme was shared and is Done being edited
                 self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "done")
             }
         }
@@ -141,12 +144,29 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // MARK: Helper Methods
     
+    func setupDefaultTextAttributes() {
+        if let font = MemeSharedModel.sharedInstance.getMemeFont() {
+            self.defaultFont = font
+        }else {
+            MemeSharedModel.sharedInstance.createMemeFont("HelveticaNeue-CondensedBlack")
+            if let font = MemeSharedModel.sharedInstance.getMemeFont(){
+                self.defaultFont = font
+            }
+        }
+                
+        self.memeTextAttributes = [
+            NSStrokeColorAttributeName: UIColor.blackColor(),
+            NSForegroundColorAttributeName: UIColor.whiteColor(),
+            NSFontAttributeName: UIFont(name: self.defaultFont, size: 40)!, // "HelveticaNeue-CondensedBlack"
+            NSStrokeWidthAttributeName: -4.0]
+    }
+    
     func setupTextFields() {
         self.topTextField.delegate = self
         self.bottomTextField.delegate = self
         
-        self.topTextField.defaultTextAttributes = memeTextAttributes
-        self.bottomTextField.defaultTextAttributes = memeTextAttributes
+        self.topTextField.defaultTextAttributes = self.memeTextAttributes
+        self.bottomTextField.defaultTextAttributes = self.memeTextAttributes
         
         self.topTextField.textAlignment = NSTextAlignment.Center
         self.bottomTextField.textAlignment = NSTextAlignment.Center
