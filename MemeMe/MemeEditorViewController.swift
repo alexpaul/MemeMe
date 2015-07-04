@@ -70,6 +70,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.imagePickerController = UIImagePickerController()
         self.imagePickerController.delegate = self
         
+        // Check if Camera and Photo Library is Available
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
             && UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
         {
@@ -81,6 +82,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.imagePickerController = UIImagePickerController()
         self.imagePickerController.delegate = self
         
+        // Check if Photos Library is Available
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary){
             
             setupPhotosAlbum()
@@ -113,12 +115,22 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // MARK: UIImagePickerControllerDelegate
     
-    func imagePickerController(picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         
+        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage { // safe unwrapping
+            self.imageView.image = editedImage
+            
+            //UIImageWriteToSavedPhotosAlbum(editedImage, nil, nil, nil)
+            
+            // Enable the Action Bar Button Item
+            self.shareBarButtonItem.enabled = true
+        }
+
         // Image was selected
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{ // safe unwrapping of the info[key] object
-            self.imageView.image = image
+        else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.imageView.image = originalImage
+            
+            //UIImageWriteToSavedPhotosAlbum(originalImage, nil, nil, nil)
             
             // Enable the Action Bar Button Item
             self.shareBarButtonItem.enabled = true
@@ -181,14 +193,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func setupCamera(){
         self.imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-        self.imagePickerController.allowsEditing = false
+        self.imagePickerController.allowsEditing = true
         self.imagePickerController.mediaTypes = [kUTTypeImage] // capture still images ONLY
         self.presentViewController(self.imagePickerController, animated: true, completion: nil)
     }
     
     func setupPhotosAlbum(){
         self.imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        self.imagePickerController.allowsEditing = false
+        self.imagePickerController.allowsEditing = true
+        self.imagePickerController.mediaTypes = [kUTTypeImage]
         self.presentViewController(self.imagePickerController, animated: true, completion: nil)
     }
     

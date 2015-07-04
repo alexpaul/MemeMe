@@ -36,7 +36,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="gPD-NF-nfq">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="ndd-v3-Yw8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ndd-v3-Yw8">
                             <connections>
                                 <action selector="doneBarButtonItemPressed:" destination="T7b-69-2nL" id="ca5-tp-RZT"/>
                             </connections>
