@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
     
-    var fonts = ["HelveticaNeue-CondensedBlack", "Verdana-Bold", "Menlo-Bold", "GillSans-Bold"]
+    var fonts = ["HelveticaNeue-CondensedBlack", "Verdana-Bold", "Menlo-Bold", "GillSans-Bold", "Impact"]
     var defaultFont: String!
     
     // MARK: IBOutlets

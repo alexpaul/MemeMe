@@ -23,6 +23,7 @@
 		5701533B1B420A290059DF2D /* MemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5701533A1B420A290059DF2D /* MemeCollectionViewCell.swift */; };
 		5701533D1B420C610059DF2D /* MemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5701533C1B420C610059DF2D /* MemeTableViewCell.swift */; };
 		577F73FE1B461FF8004CD6F4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577F73FD1B461FF8004CD6F4 /* SettingsViewController.swift */; };
+		577F74011B47FC7B004CD6F4 /* Impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 577F74001B47FC7B004CD6F4 /* Impact.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		5701533A1B420A290059DF2D /* MemeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeCollectionViewCell.swift; sourceTree = "<group>"; };
 		5701533C1B420C610059DF2D /* MemeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeTableViewCell.swift; sourceTree = "<group>"; };
 		577F73FD1B461FF8004CD6F4 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		577F74001B47FC7B004CD6F4 /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				5701532E1B3CE4770059DF2D /* MobileCoreServices.framework */,
 				570153151B3C0EFB0059DF2D /* Images.xcassets */,
 				570153171B3C0EFB0059DF2D /* LaunchScreen.xib */,
+				577F74001B47FC7B004CD6F4 /* Impact.ttf */,
 				5701530D1B3C0EFB0059DF2D /* MemeMe.xcdatamodeld */,
 				5701530B1B3C0EFB0059DF2D /* AppDelegate.swift */,
 				5701530A1B3C0EFB0059DF2D /* Info.plist */,
@@ -271,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				577F74011B47FC7B004CD6F4 /* Impact.ttf in Resources */,
 				570153141B3C0EFB0059DF2D /* Main.storyboard in Resources */,
 				570153191B3C0EFB0059DF2D /* LaunchScreen.xib in Resources */,
 				570153161B3C0EFB0059DF2D /* Images.xcassets in Resources */,

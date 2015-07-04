@@ -148,7 +148,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         if let font = MemeSharedModel.sharedInstance.getMemeFont() {
             self.defaultFont = font
         }else {
-            MemeSharedModel.sharedInstance.createMemeFont("HelveticaNeue-CondensedBlack")
+            MemeSharedModel.sharedInstance.createMemeFont("Impact")
             if let font = MemeSharedModel.sharedInstance.getMemeFont(){
                 self.defaultFont = font
             }
