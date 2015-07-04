@@ -171,8 +171,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.topTextField.textAlignment = NSTextAlignment.Center
         self.bottomTextField.textAlignment = NSTextAlignment.Center
         
-        self.topTextField.text = "TOP"
-        self.bottomTextField.text = "BOTTOM"
+        if self.topTextField.text == "" {
+            self.topTextField.text = "TOP"
+        }
+        if self.bottomTextField.text == "" {
+            self.bottomTextField.text = "BOTTOM"
+        }
     }
     
     func setupCamera(){
