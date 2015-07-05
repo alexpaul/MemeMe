@@ -5,6 +5,7 @@
 //  Created by Alex Paul on 6/25/15.
 //  Copyright (c) 2015 Alex Paul. All rights reserved.
 //
+//  Meme Editor: Here an image is selected from the Photos Library or Camera and Meme Text Edited 
 
 import UIKit
 import MobileCoreServices
@@ -173,7 +174,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.memeTextAttributes = [
             NSStrokeColorAttributeName: UIColor.blackColor(),
             NSForegroundColorAttributeName: UIColor.whiteColor(),
-            NSFontAttributeName: UIFont(name: self.defaultFont, size: 40)!, // "HelveticaNeue-CondensedBlack"
+            NSFontAttributeName: UIFont(name: self.defaultFont, size: 40)!, 
             NSStrokeWidthAttributeName: -4.0]
     }
     

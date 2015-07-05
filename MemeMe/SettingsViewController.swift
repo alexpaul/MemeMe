@@ -5,6 +5,7 @@
 //  Created by Alex Paul on 7/2/15.
 //  Copyright (c) 2015 Alex Paul. All rights reserved.
 //
+//  Settings provided various Fonts to choose from and as switch to Save Photos to the Photos Library 
 
 import UIKit
 
@@ -27,9 +28,6 @@ class SettingsViewController: UITableViewController {
         if var font = MemeSharedModel.sharedInstance.getMemeFont() {
             self.defaultFont = font
         }
-        
-        // Set the Save Photos Switch 
-        //self.savePhotosSwitch.on = MemeSharedModel.sharedInstance.shouldPhotosBeSavedToPhotoLibrary()
     }
     
     // MARK: IBActions
@@ -102,7 +100,7 @@ class SettingsViewController: UITableViewController {
             tableView.deselectRowAtIndexPath(indexPath, animated: false)
             
             let fontIndex: Int = find(self.fonts, self.defaultFont)!
-            // NOT Supported in Swift 2.0, use arrayName.indexOf()
+            // NOT Supported in Swift 2.0 / Xcode 7, use arrayName.indexOf()
             
             // Return if Font index is the same as the current selected index
             if indexPath.row == fontIndex {

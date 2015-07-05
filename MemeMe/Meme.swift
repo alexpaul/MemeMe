@@ -5,6 +5,7 @@
 //  Created by Alex Paul on 6/27/15.
 //  Copyright (c) 2015 Alex Paul. All rights reserved.
 //
+//  Struct of Data Objects for MemeMe
 
 import UIKit
 
