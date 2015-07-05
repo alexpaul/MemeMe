@@ -120,7 +120,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage { // safe unwrapping
             self.imageView.image = editedImage
             
-            //UIImageWriteToSavedPhotosAlbum(editedImage, nil, nil, nil)
+            if MemeSharedModel.sharedInstance.shouldPhotosBeSavedToPhotoLibrary() {
+                UIImageWriteToSavedPhotosAlbum(editedImage, nil, nil, nil)
+            }
             
             // Enable the Action Bar Button Item
             self.shareBarButtonItem.enabled = true
@@ -130,7 +132,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.imageView.image = originalImage
             
-            //UIImageWriteToSavedPhotosAlbum(originalImage, nil, nil, nil)
+            if MemeSharedModel.sharedInstance.shouldPhotosBeSavedToPhotoLibrary() {
+                UIImageWriteToSavedPhotosAlbum(originalImage, nil, nil, nil)
+            }
             
             // Enable the Action Bar Button Item
             self.shareBarButtonItem.enabled = true
@@ -193,7 +197,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func setupCamera(){
         self.imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-        self.imagePickerController.allowsEditing = true
+        self.imagePickerController.allowsEditing = false
         self.imagePickerController.mediaTypes = [kUTTypeImage] // capture still images ONLY
         self.presentViewController(self.imagePickerController, animated: true, completion: nil)
     }

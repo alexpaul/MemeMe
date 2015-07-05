@@ -12,6 +12,7 @@ class MemeSharedModel: NSObject {
     
     var memes = [Meme]() // Meme Array
     var memeFont: String!
+    var savePhotos = false
     
     class var sharedInstance: MemeSharedModel {
         struct Static {
@@ -42,6 +43,14 @@ class MemeSharedModel: NSObject {
     
     func createMemeFont(memeFont: String) {
         self.memeFont = memeFont
+    }
+    
+    func savePhotosToThePhotoLibrary(savePhotos: Bool) {
+        self.savePhotos = savePhotos
+    }
+    
+    func shouldPhotosBeSavedToPhotoLibrary() -> Bool {
+        return savePhotos
     }
    
 }
