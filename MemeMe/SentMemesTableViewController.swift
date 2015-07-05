@@ -51,7 +51,9 @@ class SentMemesTableViewController: UIViewController, UITableViewDelegate, UITab
         let meme = self.sharedModel.memesArray()[indexPath.row]
         
         cell.memeImageView.image = meme.memeImage
+        cell.topMemeLabel.font = UIFont(name: self.sharedModel.getMemeFont()!, size: 17.0)
         cell.topMemeLabel.text = meme.topMeme
+        cell.bottomMemeLabel.font = UIFont(name: self.sharedModel.getMemeFont()!, size: 17.0)
         cell.bottomMemeLabel.text = meme.bottomMeme
         
         return cell
