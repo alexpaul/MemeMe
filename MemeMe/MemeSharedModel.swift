@@ -14,6 +14,7 @@ class MemeSharedModel: NSObject {
     var memes = [Meme]() // Meme Array
     var memeFont: String!
     var savePhotos = false
+    var croppingAllowed = false
     
     class var sharedInstance: MemeSharedModel {
         struct Static {
@@ -52,6 +53,14 @@ class MemeSharedModel: NSObject {
     
     func shouldPhotosBeSavedToPhotoLibrary() -> Bool {
         return savePhotos
+    }
+    
+    func isCroppingAllowed() -> Bool {
+        return croppingAllowed
+    }
+    
+    func croppingIsAllowed(croppingAllowed: Bool) {
+        self.croppingAllowed = croppingAllowed
     }
    
 }

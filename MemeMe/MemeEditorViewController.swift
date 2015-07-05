@@ -198,14 +198,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func setupCamera(){
         self.imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-        self.imagePickerController.allowsEditing = false
+        self.imagePickerController.allowsEditing = MemeSharedModel.sharedInstance.isCroppingAllowed()
         self.imagePickerController.mediaTypes = [kUTTypeImage] // capture still images ONLY
         self.presentViewController(self.imagePickerController, animated: true, completion: nil)
     }
     
     func setupPhotosAlbum(){
         self.imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        self.imagePickerController.allowsEditing = true
+        self.imagePickerController.allowsEditing = MemeSharedModel.sharedInstance.isCroppingAllowed()
         self.imagePickerController.mediaTypes = [kUTTypeImage]
         self.presentViewController(self.imagePickerController, animated: true, completion: nil)
     }

@@ -31,7 +31,9 @@ class SentMemesCollectionViewController: UIViewController,
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         self.sharedModel = MemeSharedModel.sharedInstance
+        
         self.collectionView.reloadData()
     }
     

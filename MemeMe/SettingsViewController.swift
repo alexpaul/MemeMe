@@ -17,6 +17,7 @@ class SettingsViewController: UITableViewController {
     var defaultFont: String!
     var cell = UITableViewCell()
     var savePhotosSwitch: UISwitch!
+    var allowCroppingSwitch: UISwitch!
     
     
     // View Life Cycle
@@ -39,7 +40,7 @@ class SettingsViewController: UITableViewController {
     // MARK: UITableViewDataSource
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -55,6 +56,9 @@ class SettingsViewController: UITableViewController {
 
         }else if section == 1 {
             // Return 1 if Save Photos Cell
+            rowCount = 1
+        }else if section == 2 {
+            // Return 1 if Allow Cropping Cell
             rowCount = 1
         }
         
@@ -88,6 +92,18 @@ class SettingsViewController: UITableViewController {
             SavePhotosCell.accessoryView = self.savePhotosSwitch
             
             self.cell = SavePhotosCell
+        } else if indexPath.section == 2 {
+            let AllowCroppingCell = tableView.dequeueReusableCellWithIdentifier("AllowCroppingCell", forIndexPath: indexPath) as! UITableViewCell
+
+            // Configure a UISwitch
+            self.allowCroppingSwitch = UISwitch(frame: CGRect(x: 80, y: 0, width: 20, height: 20))
+            self.allowCroppingSwitch.on = MemeSharedModel.sharedInstance.isCroppingAllowed()
+            self.allowCroppingSwitch.addTarget(self, action: "allowCropppingSwitchEventTriggered", forControlEvents: UIControlEvents.ValueChanged | UIControlEvents.TouchDragInside)
+            
+            AllowCroppingCell.textLabel?.text = "Allow Cropping"
+            AllowCroppingCell.accessoryView = self.allowCroppingSwitch
+            
+            self.cell = AllowCroppingCell
         }
         return self.cell
     }
@@ -138,6 +154,14 @@ class SettingsViewController: UITableViewController {
         }else{
             // Do NOT Save ANY Photos to the Photo Library
             MemeSharedModel.sharedInstance.savePhotosToThePhotoLibrary(false)
+        }
+    }
+    
+    func allowCropppingSwitchEventTriggered() {
+        if self.allowCroppingSwitch.on {
+            MemeSharedModel.sharedInstance.croppingIsAllowed(true)
+        }else {
+            MemeSharedModel.sharedInstance.croppingIsAllowed(false)
         }
     }
     
